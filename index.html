@@ -44,7 +44,7 @@
         <div class="market-title">Metabolic Health & Glycemic Control</div>
         <div class="prop-card">
             <div class="prop-name">Hemoglobin A1c (HbA1c)</div>
-            <div class="prop-desc">3-month structural blood sugar average. Normal is &lt;5.7%.</div>
+            <div class="prop-desc">3-month structural blood sugar average. Normal is less than 5.7%.</div>
             <div class="odds-row">
                 <button class="odds-button" onclick="selectProp('HbA1c', 'Over 5.6%', 140, this)">Over 5.6% <span class="odds-val">+140</span></button>
                 <button class="odds-button" onclick="selectProp('HbA1c', 'Under 5.6%', -175, this)">Under 5.6% <span class="odds-val">-175</span></button>
@@ -65,7 +65,7 @@
         <div class="market-title">Lipid Panel (Cardiovascular Fats)</div>
         <div class="prop-card">
             <div class="prop-name">LDL Cholesterol</div>
-            <div class="prop-desc">The "Bad" cholesterol. Optimal is &lt;100 mg/dL.</div>
+            <div class="prop-desc">The "Bad" cholesterol. Optimal is less than 100 mg/dL.</div>
             <div class="odds-row">
                 <button class="odds-button" onclick="selectProp('LDL', 'Over 100 mg/dL', -115, this)">Over 100 <span class="odds-val">-115</span></button>
                 <button class="odds-button" onclick="selectProp('LDL', 'Under 100 mg/dL', -115, this)">Under 100 <span class="odds-val">-115</span></button>
@@ -73,7 +73,7 @@
         </div>
         <div class="prop-card">
             <div class="prop-name">HDL Cholesterol</div>
-            <div class="prop-desc">The "Good" protective cholesterol. Normal is &gt;40 mg/dL.</div>
+            <div class="prop-desc">The "Good" protective cholesterol. Normal is greater than 40 mg/dL.</div>
             <div class="odds-row">
                 <button class="odds-button" onclick="selectProp('HDL', 'Over 50 mg/dL', -130, this)">Over 50 <span class="odds-val">-130</span></button>
                 <button class="odds-button" onclick="selectProp('HDL', 'Under 50 mg/dL', 100, this)">Under 50 <span class="odds-val">+100</span></button>
@@ -81,7 +81,7 @@
         </div>
         <div class="prop-card">
             <div class="prop-name">Triglycerides</div>
-            <div class="prop-desc">Stored fat lipids in serum. Normal is &lt;150 mg/dL.</div>
+            <div class="prop-desc">Stored fat lipids in serum. Normal is less than 150 mg/dL.</div>
             <div class="odds-row">
                 <button class="odds-button" onclick="selectProp('Triglycerides', 'Over 150 mg/dL', 150, this)">Over 150 <span class="odds-val">+150</span></button>
                 <button class="odds-button" onclick="selectProp('Triglycerides', 'Under 150 mg/dL', -200, this)">Under 150 <span class="odds-val">-200</span></button>
@@ -133,9 +133,182 @@
             </div>
         </div>
     </div>
-
     <!-- CMP RENAL PANEL -->
     <div class="market-section">
         <div class="market-title">CMP - Kidney Function & Electrolytes</div>
         <div class="prop-card">
             <div class="prop-name">Creatinine</div>
+            <div class="prop-desc">Muscle waste metric used to index kidney filtration. Normal is 0.7-1.3 mg/dL.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('Creatinine', 'Over 1.0', 120, this)">Over 1.0 <span class="odds-val">+120</span></button>
+                <button class="odds-button" onclick="selectProp('Creatinine', 'Under 1.0', -150, this)">Under 1.0 <span class="odds-val">-150</span></button>
+            </div>
+        </div>
+        <div class="prop-card">
+            <div class="prop-name">BUN (Blood Urea Nitrogen)</div>
+            <div class="prop-desc">Liver breakdown waste cleared by kidneys. Normal is 6-24 mg/dL.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('BUN', 'Over 15', 130, this)">Over 15 <span class="odds-val">+130</span></button>
+                <button class="odds-button" onclick="selectProp('BUN', 'Under 15', -170, this)">Under 15 <span class="odds-val">-170</span></button>
+            </div>
+        </div>
+        <div class="prop-card">
+            <div class="prop-name">Sodium</div>
+            <div class="prop-desc">Key systemic structural fluid mineral. Range: 135-145 mEq/L.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('Sodium', 'Over 140', -120, this)">Over 140 <span class="odds-val">-120</span></button>
+                <button class="odds-button" onclick="selectProp('Sodium', 'Under 140', -110, this)">Under 140 <span class="odds-val">-110</span></button>
+            </div>
+        </div>
+        <div class="prop-card">
+            <div class="prop-name">Potassium</div>
+            <div class="prop-desc">Critical intracellular nerve dynamic mineral. Range: 3.5-5.2 mEq/L.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('Potassium', 'Over 4.2', 100, this)">Over 4.2 <span class="odds-val">EVEN</span></button>
+                <button class="odds-button" onclick="selectProp('Potassium', 'Under 4.2', -130, this)">Under 4.2 <span class="odds-val">-130</span></button>
+            </div>
+        </div>
+        <div class="prop-card">
+            <div class="prop-name">Calcium</div>
+            <div class="prop-desc">Systemic skeletal/neurological metric balance. Range: 8.5-10.2 mg/dL.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('Calcium', 'Over 9.5', -110, this)">Over 9.5 <span class="odds-val">-110</span></button>
+                <button class="odds-button" onclick="selectProp('Calcium', 'Under 9.5', -120, this)">Under 9.5 <span class="odds-val">-120</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CMP HEPATIC PANEL -->
+    <div class="market-section">
+        <div class="market-title">CMP - Hepatic (Liver) Performance</div>
+        <div class="prop-card">
+            <div class="prop-name">ALT Enzyme</div>
+            <div class="prop-desc">Enzyme showing direct acute liver cellular impact. Normal is 7-56 U/L.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('ALT', 'Over 30', 160, this)">Over 30 <span class="odds-val">+160</span></button>
+                <button class="odds-button" onclick="selectProp('ALT', 'Under 30', -210, this)">Under 30 <span class="odds-val">-210</span></button>
+            </div>
+        </div>
+        <div class="prop-card">
+            <div class="prop-name">AST Enzyme</div>
+            <div class="prop-desc">Enzyme processing liver/tissue structural stress. Normal is 10-40 U/L.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('AST', 'Over 25', 140, this)">Over 25 <span class="odds-val">+140</span></button>
+                <button class="odds-button" onclick="selectProp('AST', 'Under 25', -180, this)">Under 25 <span class="odds-val">-180</span></button>
+            </div>
+        </div>
+        <div class="prop-card">
+            <div class="prop-name">Alkaline Phosphatase (ALP)</div>
+            <div class="prop-desc">Biliary duct system status enzyme. Normal is 44-147 U/L.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('ALP', 'Over 90', 110, this)">Over 90 <span class="odds-val">+110</span></button>
+                <button class="odds-button" onclick="selectProp('ALP', 'Under 90', -140, this)">Under 90 <span class="odds-val">-140</span></button>
+            </div>
+        </div>
+        <div class="prop-card">
+            <div class="prop-name">Total Bilirubin</div>
+            <div class="prop-desc">Heme breakdown organic bile compound marker. Normal is 0.1-1.2 mg/dL.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('Bilirubin', 'Over 0.6', 100, this)">Over 0.6 <span class="odds-val">EVEN</span></button>
+                <button class="odds-button" onclick="selectProp('Bilirubin', 'Under 0.6', -130, this)">Under 0.6 <span class="odds-val">-130</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEPATITIS SCREENING -->
+    <div class="market-section">
+        <div class="market-title">Hepatitis Screening</div>
+        <div class="prop-card">
+            <div class="prop-name">Hepatitis C Antibody</div>
+            <div class="prop-desc">Viral systemic immune antibody presence check.</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('HepC', 'Negative', -5000, this)">Negative <span class="odds-val">-5000</span></button>
+                <button class="odds-button" onclick="selectProp('HepC', 'Positive', 3500, this)">Positive <span class="odds-val">+3500</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM FLOATING BET SLIP -->
+    <div class="bet-slip">
+        <div class="slip-title">🎰 LIVE PARLAY BUILDER</div>
+        <div id="slip-active-bets" style="color: #8c96ab; font-size: 0.9rem; margin-bottom: 15px; max-height: 120px; overflow-y: auto;">No active lines selected. Tap choices above to craft a slip!</div>
+        
+        <div class="slip-row">
+            <span>Wager Amount (Fake Chips):</span>
+            <input type="number" id="wager" value="100" min="1" oninput="updateSlip()">
+        </div>
+
+        <div class="payout-box">
+            <div class="slip-row" style="margin-bottom: 5px;"><span>Slip Odds:</span><span id="display-odds" style="font-weight:bold; color:#ff3333;">-</span></div>
+            <div class="slip-row" style="margin-bottom: 0; font-size: 1.1rem; font-weight: bold;"><span>Est. Payout:</span><span id="display-payout" style="color:#ff4444;">0.00</span></div>
+        </div>
+
+        <button class="discord-btn" onclick="copySlip()">📋 COPY SLIP FOR DISCORD</button>
+    </div>
+
+    <!-- PUSH UP SPACER FOR ACCESSIBILITY -->
+    <div style="height: 180px;"></div>
+</div>
+
+<script>
+    let currentParlay = {};
+
+    function selectProp(category, selection, odds, element) {
+        const siblings = element.parentNode.children;
+        for (let sib of siblings) { sib.classList.remove('selected'); }
+        
+        element.classList.add('selected');
+        currentParlay[category] = { selection, odds };
+        updateSlip();
+    }
+
+    function calculateParlayOdds() {
+        let totalMultiplier = 1;
+        let count = 0;
+        for (let key in currentParlay) {
+            let american = currentParlay[key].odds;
+            let decimal = american > 0 ? (american / 100) + 1 : (100 / Math.abs(american)) + 1;
+            totalMultiplier *= decimal;
+            count++;
+        }
+        if (count === 0) return { american: 0, multiplier: 0 };
+        
+        let finalAmerican = totalMultiplier >= 2 ? Math.round((totalMultiplier - 1) * 100) : Math.round(-100 / (totalMultiplier - 1));
+        if (finalAmerican > 0) finalAmerican = "+" + finalAmerican;
+        return { american: finalAmerican, multiplier: totalMultiplier };
+    }
+
+    function updateSlip() {
+        const activeBetsDiv = document.getElementById('slip-active-bets');
+        let html = "";
+        let count = 0;
+        
+        for (let key in currentParlay) {
+            html += `<div style="color:#fff; margin-bottom:4px; font-size:0.85rem;"><b>${key}:</b> ${currentParlay[key].selection} (${currentParlay[key].odds > 0 ? '+' : ''}${currentParlay[key].odds})</div>`;
+            count++;
+        }
+        
+        if (count > 0) {
+            activeBetsDiv.innerHTML = html;
+            let oddsObj = calculateParlayOdds();
+            document.getElementById('display-odds').innerText = oddsObj.american;
+            let wager = parseFloat(document.getElementById('wager').value) || 0;
+            document.getElementById('display-payout').innerText = (wager * oddsObj.multiplier).toFixed(2);
+        } else {
+            activeBetsDiv.innerHTML = "No active lines selected. Tap choices above to craft a slip!";
+            document.getElementById('display-odds').innerText = "-";
+            document.getElementById('display-payout').innerText = "0.00";
+        }
+    }
+
+    function copySlip() {
+        const username = document.getElementById('username').value.trim() || "Anonymous Gambler";
+        let oddsObj = calculateParlayOdds();
+        let wager = document.getElementById('wager').value;
+        let payout = document.getElementById('display-payout').innerText;
+        
+        if (Object.keys(currentParlay).length === 0) {
+            alert("Pick at least one biomarker before copying your slip!");
+            return;
+        }
+
