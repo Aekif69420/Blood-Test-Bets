@@ -1,216 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ultimate Lab Results Sportsbook</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            background-color: #0c0d12;
-            color: #fff;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+<title>The Ultimate Lab Results Sportsbook</title>
 
-        .sportsbook {
-            width: 100%;
-            max-width: 600px;
-            padding-bottom: 20px;
-        }
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-        .header {
-            background: linear-gradient(90deg, #b31010, #1e2029);
-            padding: 20px;
-            border-radius: 8px 8px 0 0;
-            font-weight: bold;
-            font-size: 1.4rem;
-            border-bottom: 2px solid #ff3333;
-            letter-spacing: 1px;
-        }
+    body {
+        background-color: #0c0d12;
+        color: #fff;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        .market-section {
-            background-color: #15171e;
-            margin-top: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #232631;
-        }
+    .sportsbook {
+        width: 100%;
+        max-width: 600px;
+        padding-bottom: 20px;
+    }
 
-        .market-title {
-            background-color: #1e212b;
-            padding: 12px 15px;
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: #f0f4f8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid #2d3142;
-        }
+    .header {
+        background: linear-gradient(90deg, #b31010, #1e2029);
+        padding: 20px;
+        border-radius: 8px 8px 0 0;
+        font-weight: bold;
+        font-size: 1.4rem;
+        border-bottom: 2px solid #ff3333;
+        letter-spacing: 1px;
+    }
 
-        .prop-card {
-            padding: 15px;
-            border-bottom: 1px solid #232631;
-        }
+    .subheader {
+        color: #8c96ab;
+        font-size: .78rem;
+        padding: 10px 2px 0;
+        line-height: 1.4;
+    }
 
-        .prop-card:last-child {
-            border-bottom: none;
-        }
+    .market-section {
+        background-color: #15171e;
+        margin: 15px 0;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #232631;
+    }
 
-        .prop-name {
-            font-weight: bold;
-            margin-bottom: 4px;
-            font-size: 1rem;
-            color: #fff;
-        }
+    .market-title {
+        background-color: #1e212b;
+        padding: 12px 15px;
+        font-size: .95rem;
+        font-weight: bold;
+        color: #f0f4f8;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 1px solid #2d3142;
+    }
 
-        .prop-desc {
-            font-size: 0.8rem;
-            color: #788296;
-            margin-bottom: 10px;
-        }
+    .prop-card {
+        padding: 15px;
+        border-bottom: 1px solid #232631;
+    }
 
+    .prop-card:last-child {
+        border-bottom: none;
+    }
+
+    .prop-name {
+        font-weight: bold;
+        margin-bottom: 4px;
+        font-size: 1rem;
+    }
+
+    .prop-desc {
+        font-size: .8rem;
+        color: #7890b0;
+        margin-bottom: 10px;
+        line-height: 1.35;
+    }
+
+    .baseline {
+        color: #aab4c7;
+    }
+
+    .odds-row {
+        display: flex;
+        gap: 10px;
+    }
+
+    .odds-button {
+        flex: 1;
+        background-color: #212431;
+        border: 1px solid #32374b;
+        color: #fff;
+        padding: 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        transition: all .2s;
+        font-size: .9rem;
+    }
+
+    .odds-button:hover {
+        background-color: #2b3042;
+        border-color: #59617c;
+    }
+
+    .odds-button.selected {
+        background-color: #b31010;
+        border-color: #ff3333;
+    }
+
+    /* ODDS COLORS */
+    .odds-val.positive {
+        color: #39d98a;
+    }
+
+    .odds-val.negative {
+        color: #ff4444;
+    }
+
+    .odds-val.even {
+        color: #f0f4f8;
+    }
+
+    /* Selected bet becomes white regardless of odds */
+    .odds-button.selected .odds-val {
+        color: #fff;
+    }
+
+    .username-input {
+        width: 100%;
+        background-color: #212431;
+        border: 1px solid #32374b;
+        color: #fff;
+        padding: 12px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+
+    .bet-slip {
+        background-color: #15171e;
+        border-radius: 8px;
+        border: 2px solid #ff3333;
+        padding: 15px;
+        margin-top: 25px;
+        position: sticky;
+        bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.8);
+        z-index: 100;
+    }
+
+    .slip-title {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        color: #ff3333;
+        border-bottom: 1px solid #232631;
+        padding-bottom: 8px;
+        text-transform: uppercase;
+    }
+
+    .slip-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 12px;
+        font-size: .95rem;
+    }
+
+    input[type="number"] {
+        background-color: #212431;
+        border: 1px solid #32374b;
+        color: #fff;
+        padding: 8px;
+        border-radius: 4px;
+        width: 90px;
+        text-align: right;
+        font-weight: bold;
+    }
+
+    .payout-box {
+        background-color: #1e212b;
+        padding: 12px;
+        border-radius: 6px;
+        margin-top: 15px;
+        border: 1px solid #2d3142;
+    }
+
+    .discord-btn {
+        width: 100%;
+        background-color: #5865F2;
+        color: white;
+        border: none;
+        padding: 14px;
+        font-weight: bold;
+        font-size: 1.05rem;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    .discord-btn:hover {
+        background-color: #4752c4;
+    }
+
+    @media (max-width: 480px) {
         .odds-row {
-            display: flex;
-            gap: 10px;
+            gap: 7px;
         }
 
         .odds-button {
-            flex: 1;
-            background-color: #212431;
-            border: 1px solid #32374b;
-            color: #fff;
-            padding: 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            transition: all 0.2s;
-            font-size: 0.9rem;
+            padding: 11px 9px;
+            font-size: .82rem;
         }
-
-        .odds-button:hover {
-            background-color: #2b3042;
-            border-color: #434965;
-        }
-
-        .odds-button.selected {
-            background-color: #b31010;
-            border-color: #ff3333;
-        }
-
-        .odds-val {
-            color: #ff4444;
-        }
-
-        .odds-button.selected .odds-val {
-            color: #fff;
-        }
-
-        .bet-slip {
-            background-color: #15171e;
-            border-radius: 8px;
-            border: 2px solid #ff3333;
-            padding: 15px;
-            margin-top: 25px;
-            position: sticky;
-            bottom: 20px;
-            box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
-            z-index: 100;
-        }
-
-        .slip-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: #ff3333;
-            border-bottom: 1px solid #232631;
-            padding-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .slip-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
-
-        input[type="number"] {
-            background-color: #212431;
-            border: 1px solid #32374b;
-            color: #fff;
-            padding: 8px;
-            border-radius: 4px;
-            width: 80px;
-            text-align: right;
-            font-weight: bold;
-        }
-
-        .payout-box {
-            background-color: #1e212b;
-            padding: 12px;
-            border-radius: 6px;
-            margin-top: 15px;
-            border: 1px solid #2d3142;
-        }
-
-        .discord-btn {
-            width: 100%;
-            background-color: #5865F2;
-            color: white;
-            border: none;
-            padding: 14px;
-            font-weight: bold;
-            font-size: 1.05rem;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.2s;
-            letter-spacing: 0.5px;
-        }
-
-        .discord-btn:hover {
-            background-color: #4752c4;
-        }
-
-        .username-input {
-            width: calc(100% - 24px);
-            background-color: #212431;
-            border: 1px solid #32374b;
-            color: #fff;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-    </style>
+    }
+</style>
 </head>
 
 <body>
 
 <div class="sportsbook">
 
-    <div class="header">🩸 DEGENERATE HEALTH METRICS BOOK</div>
+    <div class="header">
+        🩸 DEGENERATE HEALTH METRICS BOOK
+    </div>
 
-    <div style="padding: 15px 0 5px 0;">
+    <div class="subheader">
+        Reference ranges are common adult laboratory ranges.
+        Actual ranges vary by laboratory. Odds are fictional and for fun.
+    </div>
+
+    <div style="padding:15px 0 5px;">
         <input
             type="text"
             id="username"
             class="username-input"
             placeholder="Enter your Discord Username"
-            oninput="updateSlip()"
         >
     </div>
 
 
-    <!-- METABOLIC / BLOOD SUGAR -->
+    <!-- ============================= -->
+    <!-- METABOLIC -->
+    <!-- ============================= -->
 
     <div class="market-section">
 
@@ -219,31 +262,25 @@
         </div>
 
         <div class="prop-card">
-
-            <div class="prop-name">
-                Hemoglobin A1c (HbA1c)
-            </div>
+            <div class="prop-name">Hemoglobin A1c (HbA1c)</div>
 
             <div class="prop-desc">
-                3-month structural blood sugar average. Normal is less than 5.7%.
+                Approximate 2–3 month blood glucose marker.
+                <span class="baseline">Normal: &lt;5.7%.</span>
             </div>
 
             <div class="odds-row">
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('HbA1c', 'Over 5.6%', 140, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('HbA1c','Over 5.6%',175,this)">
                     Over 5.6%
-                    <span class="odds-val">+140</span>
+                    <span class="odds-val positive">+175</span>
                 </button>
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('HbA1c', 'Under 5.6%', -175, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('HbA1c','Under 5.6%',-225,this)">
                     Under 5.6%
-                    <span class="odds-val">-175</span>
+                    <span class="odds-val negative">-225</span>
                 </button>
 
             </div>
@@ -251,31 +288,25 @@
 
 
         <div class="prop-card">
-
-            <div class="prop-name">
-                Fasting Glucose
-            </div>
+            <div class="prop-name">Fasting Glucose</div>
 
             <div class="prop-desc">
-                Real-time serum blood sugar. Normal is 70-99 mg/dL.
+                Blood glucose at the time of testing.
+                <span class="baseline">Common fasting range: 70–100 mg/dL.</span>
             </div>
 
             <div class="odds-row">
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('Glucose', 'Over 99 mg/dL', 120, this)"
-                >
-                    Over 99
-                    <span class="odds-val">+120</span>
+                <button class="odds-button"
+                    onclick="selectProp('Glucose','Over 95 mg/dL',135,this)">
+                    Over 95
+                    <span class="odds-val positive">+135</span>
                 </button>
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('Glucose', 'Under 99 mg/dL', -150, this)"
-                >
-                    Under 99
-                    <span class="odds-val">-150</span>
+                <button class="odds-button"
+                    onclick="selectProp('Glucose','Under 95 mg/dL',-165,this)">
+                    Under 95
+                    <span class="odds-val negative">-165</span>
                 </button>
 
             </div>
@@ -284,41 +315,36 @@
     </div>
 
 
-    <!-- LIPID PANEL -->
+    <!-- ============================= -->
+    <!-- LIPIDS -->
+    <!-- ============================= -->
 
     <div class="market-section">
 
         <div class="market-title">
-            Lipid Panel (Cardiovascular Fats)
+            Lipid Panel
         </div>
 
-
         <div class="prop-card">
-
-            <div class="prop-name">
-                LDL Cholesterol
-            </div>
+            <div class="prop-name">LDL Cholesterol</div>
 
             <div class="prop-desc">
-                The "Bad" cholesterol. Optimal is less than 100 mg/dL.
+                Low-density lipoprotein cholesterol.
+                <span class="baseline">Common optimal target: &lt;100 mg/dL.</span>
             </div>
 
             <div class="odds-row">
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('LDL', 'Over 100 mg/dL', -115, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('LDL','Over 100 mg/dL',-105,this)">
                     Over 100
-                    <span class="odds-val">-115</span>
+                    <span class="odds-val negative">-105</span>
                 </button>
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('LDL', 'Under 100 mg/dL', -115, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('LDL','Under 100 mg/dL',-125,this)">
                     Under 100
-                    <span class="odds-val">-115</span>
+                    <span class="odds-val negative">-125</span>
                 </button>
 
             </div>
@@ -326,31 +352,25 @@
 
 
         <div class="prop-card">
-
-            <div class="prop-name">
-                HDL Cholesterol
-            </div>
+            <div class="prop-name">HDL Cholesterol</div>
 
             <div class="prop-desc">
-                The "Good" protective cholesterol. Normal is greater than 40 mg/dL.
+                High-density lipoprotein cholesterol.
+                <span class="baseline">For adult men, ≥40 mg/dL is generally desirable.</span>
             </div>
 
             <div class="odds-row">
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('HDL', 'Over 50 mg/dL', -130, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('HDL','Over 50 mg/dL',-115,this)">
                     Over 50
-                    <span class="odds-val">-130</span>
+                    <span class="odds-val negative">-115</span>
                 </button>
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('HDL', 'Under 50 mg/dL', 100, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('HDL','Under 50 mg/dL',-115,this)">
                     Under 50
-                    <span class="odds-val">+100</span>
+                    <span class="odds-val negative">-115</span>
                 </button>
 
             </div>
@@ -358,31 +378,25 @@
 
 
         <div class="prop-card">
-
-            <div class="prop-name">
-                Triglycerides
-            </div>
+            <div class="prop-name">Triglycerides</div>
 
             <div class="prop-desc">
-                Stored fat lipids in serum. Normal is less than 150 mg/dL.
+                Circulating triglyceride concentration.
+                <span class="baseline">Normal fasting level: &lt;150 mg/dL.</span>
             </div>
 
             <div class="odds-row">
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('Triglycerides', 'Over 150 mg/dL', 150, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('Triglycerides','Over 150 mg/dL',225,this)">
                     Over 150
-                    <span class="odds-val">+150</span>
+                    <span class="odds-val positive">+225</span>
                 </button>
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('Triglycerides', 'Under 150 mg/dL', -200, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('Triglycerides','Under 150 mg/dL',-300,this)">
                     Under 150
-                    <span class="odds-val">-200</span>
+                    <span class="odds-val negative">-300</span>
                 </button>
 
             </div>
@@ -391,348 +405,412 @@
     </div>
 
 
+    <!-- ============================= -->
     <!-- CBC -->
+    <!-- ============================= -->
 
     <div class="market-section">
 
         <div class="market-title">
-            Complete Blood Count (CBC) - Blood Cells
+            Complete Blood Count (CBC)
         </div>
 
 
         <div class="prop-card">
-            <div class="prop-name">White Blood Cell (WBC) Total</div>
+            <div class="prop-name">White Blood Cell (WBC) Count</div>
+
             <div class="prop-desc">
-                Immune response metrics. Standard line: 4.5 - 11.0 x10^3/uL.
+                White blood cells involved in immune response.
+                <span class="baseline">Adult reference: 4.5–11.0 ×10³/µL.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('WBC', 'Over 10.0', 200, this)">
-                    Over 10.0
-                    <span class="odds-val">+200</span>
+                    onclick="selectProp('WBC','Over 7.5 ×10³/µL',-105,this)">
+                    Over 7.5
+                    <span class="odds-val negative">-105</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('WBC', 'Under 10.0', -250, this)">
-                    Under 10.0
-                    <span class="odds-val">-250</span>
+                    onclick="selectProp('WBC','Under 7.5 ×10³/µL',-125,this)">
+                    Under 7.5
+                    <span class="odds-val negative">-125</span>
                 </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
-            <div class="prop-name">Red Blood Cell (RBC) Total</div>
+            <div class="prop-name">Red Blood Cell (RBC) Count</div>
+
             <div class="prop-desc">
-                Oxygen transport cells. Line baseline: 4.30 - 5.90 x10^6/uL.
+                Red blood cells transport oxygen.
+                <span class="baseline">Adult male reference: 4.6–6.2 ×10⁶/µL.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('RBC', 'Over 5.0', -120, this)">
-                    Over 5.0
-                    <span class="odds-val">-120</span>
+                    onclick="selectProp('RBC','Over 5.2 ×10⁶/µL',-110,this)">
+                    Over 5.2
+                    <span class="odds-val negative">-110</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('RBC', 'Under 5.0', -120, this)">
-                    Under 5.0
-                    <span class="odds-val">-120</span>
+                    onclick="selectProp('RBC','Under 5.2 ×10⁶/µL',-120,this)">
+                    Under 5.2
+                    <span class="odds-val negative">-120</span>
                 </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
             <div class="prop-name">Hemoglobin</div>
+
             <div class="prop-desc">
-                Iron-based oxygen protein content. Line baseline: 13.5 - 17.5 g/dL.
+                Oxygen-carrying protein in red blood cells.
+                <span class="baseline">Adult male reference: 13–18 g/dL.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('Hemoglobin', 'Over 15.0', -110, this)">
-                    Over 15.0
-                    <span class="odds-val">-110</span>
+                    onclick="selectProp('Hemoglobin','Over 15.5 g/dL',-110,this)">
+                    Over 15.5
+                    <span class="odds-val negative">-110</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('Hemoglobin', 'Under 15.0', -120, this)">
-                    Under 15.0
-                    <span class="odds-val">-120</span>
+                    onclick="selectProp('Hemoglobin','Under 15.5 g/dL',-120,this)">
+                    Under 15.5
+                    <span class="odds-val negative">-120</span>
                 </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
             <div class="prop-name">Hematocrit</div>
+
             <div class="prop-desc">
-                Volume percentage of red cells. Baseline line: 38.8% - 50.0%.
+                Percentage of blood volume composed of red blood cells.
+                <span class="baseline">Adult male reference: 40–55%.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('Hematocrit', 'Over 45%', -115, this)">
-                    Over 45%
-                    <span class="odds-val">-115</span>
+                    onclick="selectProp('Hematocrit','Over 47%',-110,this)">
+                    Over 47%
+                    <span class="odds-val negative">-110</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('Hematocrit', 'Under 45%', -115, this)">
-                    Under 45%
-                    <span class="odds-val">-115</span>
+                    onclick="selectProp('Hematocrit','Under 47%',-120,this)">
+                    Under 47%
+                    <span class="odds-val negative">-120</span>
                 </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
             <div class="prop-name">Platelet Count</div>
+
             <div class="prop-desc">
-                Structural clotting cellular pieces. Baseline: 150 - 450 x10^3/uL.
+                Platelets help blood clot.
+                <span class="baseline">Adult reference: 150–400 ×10³/µL.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('Platelets', 'Over 250k', 110, this)">
+                    onclick="selectProp('Platelets','Over 250 ×10³/µL',-115,this)">
                     Over 250k
-                    <span class="odds-val">+110</span>
+                    <span class="odds-val negative">-115</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('Platelets', 'Under 250k', -140, this)">
+                    onclick="selectProp('Platelets','Under 250 ×10³/µL',-115,this)">
                     Under 250k
-                    <span class="odds-val">-140</span>
+                    <span class="odds-val negative">-115</span>
                 </button>
+
             </div>
         </div>
 
     </div>
 
 
-    <!-- CMP RENAL -->
+    <!-- ============================= -->
+    <!-- KIDNEY / ELECTROLYTES -->
+    <!-- ============================= -->
 
     <div class="market-section">
 
         <div class="market-title">
-            CMP - Kidney Function & Electrolytes
+            CMP — Kidney Function & Electrolytes
         </div>
 
 
         <div class="prop-card">
             <div class="prop-name">Creatinine</div>
+
             <div class="prop-desc">
-                Muscle waste metric used to index kidney filtration. Normal is 0.7-1.3 mg/dL.
+                Waste product used in assessing kidney filtration.
+                <span class="baseline">Common adult reference: 0.6–1.3 mg/dL.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('Creatinine', 'Over 1.0', 120, this)">
+                    onclick="selectProp('Creatinine','Over 1.0 mg/dL',125,this)">
                     Over 1.0
-                    <span class="odds-val">+120</span>
+                    <span class="odds-val positive">+125</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('Creatinine', 'Under 1.0', -150, this)">
+                    onclick="selectProp('Creatinine','Under 1.0 mg/dL',-155,this)">
                     Under 1.0
-                    <span class="odds-val">-150</span>
+                    <span class="odds-val negative">-155</span>
                 </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
-            <div class="prop-name">BUN (Blood Urea Nitrogen)</div>
+            <div class="prop-name">BUN</div>
+
             <div class="prop-desc">
-                Liver breakdown waste cleared by kidneys. Normal is 6-24 mg/dL.
+                Blood urea nitrogen.
+                <span class="baseline">Common adult reference: 6–20 mg/dL.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('BUN', 'Over 15', 130, this)">
-                    Over 15
-                    <span class="odds-val">+130</span>
+                    onclick="selectProp('BUN','Over 13 mg/dL',-110,this)">
+                    Over 13
+                    <span class="odds-val negative">-110</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('BUN', 'Under 15', -170, this)">
-                    Under 15
-                    <span class="odds-val">-170</span>
+                    onclick="selectProp('BUN','Under 13 mg/dL',-120,this)">
+                    Under 13
+                    <span class="odds-val negative">-120</span>
                 </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
             <div class="prop-name">Sodium</div>
+
             <div class="prop-desc">
-                Key systemic structural fluid mineral. Range: 135-145 mEq/L.
+                Major extracellular electrolyte.
+                <span class="baseline">Common adult reference: 135–145 mEq/L.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('Sodium', 'Over 140', -120, this)">
+                    onclick="selectProp('Sodium','Over 140 mEq/L',-110,this)">
                     Over 140
-                    <span class="odds-val">-120</span>
+                    <span class="odds-val negative">-110</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('Sodium', 'Under 140', -110, this)">
+                    onclick="selectProp('Sodium','Under 140 mEq/L',-120,this)">
                     Under 140
-                    <span class="odds-val">-110</span>
+                    <span class="odds-val negative">-120</span>
                 </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
             <div class="prop-name">Potassium</div>
+
             <div class="prop-desc">
-                Critical intracellular nerve dynamic mineral. Range: 3.5-5.2 mEq/L.
+                Electrolyte important for nerve, muscle and cardiac function.
+                <span class="baseline">Common adult reference: 3.7–5.2 mEq/L.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('Potassium', 'Over 4.2', 100, this)">
-                    Over 4.2
-                    <span class="odds-val">EVEN</span>
+                    onclick="selectProp('Potassium','Over 4.4 mEq/L',-105,this)">
+                    Over 4.4
+                    <span class="odds-val negative">-105</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('Potassium', 'Under 4.2', -130, this)">
-                    Under 4.2
-                    <span class="odds-val">-130</span>
+                    onclick="selectProp('Potassium','Under 4.4 mEq/L',-125,this)">
+                    Under 4.4
+                    <span class="odds-val negative">-125</span>
                 </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
             <div class="prop-name">Calcium</div>
+
             <div class="prop-desc">
-                Systemic skeletal/neurological metric balance. Range: 8.5-10.2 mg/dL.
+                Serum calcium concentration.
+                <span class="baseline">Common adult reference: 8.5–10.2 mg/dL.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('Calcium', 'Over 9.5', -110, this)">
-                    Over 9.5
-                    <span class="odds-val">-110</span>
+                    onclick="selectProp('Calcium','Over 9.4 mg/dL',-110,this)">
+                    Over 9.4
+                    <span class="odds-val negative">-110</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('Calcium', 'Under 9.5', -120, this)">
-                    Under 9.5
-                    <span class="odds-val">-120</span>
+                    onclick="selectProp('Calcium','Under 9.4 mg/dL',-120,this)">
+                    Under 9.4
+                    <span class="odds-val negative">-120</span>
                 </button>
+
             </div>
         </div>
 
     </div>
 
 
-    <!-- CMP HEPATIC -->
+    <!-- ============================= -->
+    <!-- LIVER -->
+    <!-- ============================= -->
 
     <div class="market-section">
 
         <div class="market-title">
-            CMP - Hepatic (Liver) Performance
+            CMP — Liver Markers
         </div>
 
 
         <div class="prop-card">
-            <div class="prop-name">ALT Enzyme</div>
+            <div class="prop-name">ALT</div>
+
             <div class="prop-desc">
-                Enzyme showing direct acute liver cellular impact. Normal is 7-56 U/L.
+                Alanine aminotransferase.
+                <span class="baseline">Common adult reference: 4–36 U/L.</span>
             </div>
 
             <div class="odds-row">
-                <button class="odds-button"
-                        onclick="selectProp('ALT', 'Over 30', 160, this)">
-                    Over 30
-                    <span class="odds-val">+160</span>
-                </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('ALT', 'Under 30', -210, this)">
-                    Under 30
-                    <span class="odds-val">-210</span>
-                </button>
-            </div>
-        </div>
-
-
-        <div class="prop-card">
-            <div class="prop-name">AST Enzyme</div>
-            <div class="prop-desc">
-                Enzyme processing liver/tissue structural stress. Normal is 10-40 U/L.
-            </div>
-
-            <div class="odds-row">
-                <button class="odds-button"
-                        onclick="selectProp('AST', 'Over 25', 140, this)">
+                    onclick="selectProp('ALT','Over 25 U/L',135,this)">
                     Over 25
-                    <span class="odds-val">+140</span>
+                    <span class="odds-val positive">+135</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('AST', 'Under 25', -180, this)">
+                    onclick="selectProp('ALT','Under 25 U/L',-165,this)">
                     Under 25
-                    <span class="odds-val">-180</span>
+                    <span class="odds-val negative">-165</span>
                 </button>
+
+            </div>
+        </div>
+
+
+        <div class="prop-card">
+            <div class="prop-name">AST</div>
+
+            <div class="prop-desc">
+                Aspartate aminotransferase.
+                <span class="baseline">Common adult reference: 8–33 U/L.</span>
+            </div>
+
+            <div class="odds-row">
+
+                <button class="odds-button"
+                    onclick="selectProp('AST','Over 22 U/L',125,this)">
+                    Over 22
+                    <span class="odds-val positive">+125</span>
+                </button>
+
+                <button class="odds-button"
+                    onclick="selectProp('AST','Under 22 U/L',-155,this)">
+                    Under 22
+                    <span class="odds-val negative">-155</span>
+                </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
             <div class="prop-name">Alkaline Phosphatase (ALP)</div>
+
             <div class="prop-desc">
-                Biliary duct system status enzyme. Normal is 44-147 U/L.
+                Enzyme associated with liver, bile ducts and bone.
+                <span class="baseline">Common adult reference: 20–130 U/L.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('ALP', 'Over 90', 110, this)">
-                    Over 90
-                    <span class="odds-val">+110</span>
+                    onclick="selectProp('ALP','Over 75 U/L',-110,this)">
+                    Over 75
+                    <span class="odds-val negative">-110</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('ALP', 'Under 90', -140, this)">
-                    Under 90
-                    <span class="odds-val">-140</span>
+                    onclick="selectProp('ALP','Under 75 U/L',-120,this)">
+                    Under 75
+                    <span class="odds-val negative">-120</span>
                 </button>
+
             </div>
         </div>
 
 
         <div class="prop-card">
             <div class="prop-name">Total Bilirubin</div>
+
             <div class="prop-desc">
-                Heme breakdown organic bile compound marker. Normal is 0.1-1.2 mg/dL.
+                Breakdown product formed during normal red-cell turnover.
+                <span class="baseline">Common adult reference: 0.1–1.2 mg/dL.</span>
             </div>
 
             <div class="odds-row">
+
                 <button class="odds-button"
-                        onclick="selectProp('Bilirubin', 'Over 0.6', 100, this)">
-                    Over 0.6
-                    <span class="odds-val">EVEN</span>
+                    onclick="selectProp('Bilirubin','Over 0.7 mg/dL',125,this)">
+                    Over 0.7
+                    <span class="odds-val positive">+125</span>
                 </button>
 
                 <button class="odds-button"
-                        onclick="selectProp('Bilirubin', 'Under 0.6', -130, this)">
-                    Under 0.6
-                    <span class="odds-val">-130</span>
+                    onclick="selectProp('Bilirubin','Under 0.7 mg/dL',-155,this)">
+                    Under 0.7
+                    <span class="odds-val negative">-155</span>
                 </button>
+
             </div>
         </div>
 
     </div>
 
 
-    <!-- HEPATITIS SCREENING -->
+    <!-- ============================= -->
+    <!-- HEP C -->
+    <!-- ============================= -->
 
     <div class="market-section">
 
@@ -747,25 +825,22 @@
             </div>
 
             <div class="prop-desc">
-                Viral systemic immune antibody presence check.
+                Screening test for antibodies to hepatitis C virus.
+                <span class="baseline">Expected screening result: nonreactive/negative.</span>
             </div>
 
             <div class="odds-row">
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('HepC', 'Negative', -5000, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('Hep C Antibody','Negative',-5000,this)">
                     Negative
-                    <span class="odds-val">-5000</span>
+                    <span class="odds-val negative">-5000</span>
                 </button>
 
-                <button
-                    class="odds-button"
-                    onclick="selectProp('HepC', 'Positive', 3500, this)"
-                >
+                <button class="odds-button"
+                    onclick="selectProp('Hep C Antibody','Positive',2500,this)">
                     Positive
-                    <span class="odds-val">+3500</span>
+                    <span class="odds-val positive">+2500</span>
                 </button>
 
             </div>
@@ -774,7 +849,9 @@
     </div>
 
 
+    <!-- ============================= -->
     <!-- BET SLIP -->
+    <!-- ============================= -->
 
     <div class="bet-slip">
 
@@ -786,9 +863,9 @@
             id="slip-active-bets"
             style="
                 color:#8c96ab;
-                font-size:0.9rem;
+                font-size:.9rem;
                 margin-bottom:15px;
-                max-height:120px;
+                max-height:140px;
                 overflow-y:auto;
             "
         >
@@ -798,9 +875,7 @@
 
         <div class="slip-row">
 
-            <span>
-                Wager Amount (Fake Chips):
-            </span>
+            <span>Wager Amount (Fake Chips):</span>
 
             <input
                 type="number"
@@ -815,15 +890,12 @@
 
         <div class="payout-box">
 
-            <div
-                class="slip-row"
-                style="margin-bottom:5px;"
-            >
+            <div class="slip-row" style="margin-bottom:5px;">
                 <span>Slip Odds:</span>
 
                 <span
                     id="display-odds"
-                    style="font-weight:bold; color:#ff3333;"
+                    style="font-weight:bold;"
                 >
                     -
                 </span>
@@ -840,10 +912,7 @@
             >
                 <span>Est. Payout:</span>
 
-                <span
-                    id="display-payout"
-                    style="color:#ff4444;"
-                >
+                <span id="display-payout">
                     0.00
                 </span>
             </div>
@@ -860,8 +929,6 @@
 
     </div>
 
-
-    <!-- spacer so sticky bet slip doesn't cover bottom content -->
     <div style="height:180px;"></div>
 
 </div>
@@ -869,358 +936,331 @@
 
 <script>
 
-    /*
-     * CURRENT BETS
-     *
-     * One selection per biomarker/category.
-     */
-    let currentParlay = {};
+let currentParlay = {};
 
 
-    /*
-     * SELECT AN OVER/UNDER BUTTON
-     */
-    function selectProp(category, selection, odds, element) {
+/* =========================
+   SELECT BET
+========================= */
 
-        const siblings = element.parentNode.children;
+function selectProp(category, selection, odds, element) {
 
-        /*
-         * Remove selected state from the other button
-         * in this specific market.
-         */
-        for (let sib of siblings) {
-            sib.classList.remove('selected');
-        }
+    const siblings = element.parentNode.children;
 
-        /*
-         * Highlight selected button.
-         */
-        element.classList.add('selected');
-
-        /*
-         * Save selection.
-         */
-        currentParlay[category] = {
-            selection: selection,
-            odds: odds
-        };
-
-        updateSlip();
+    for (let sib of siblings) {
+        sib.classList.remove("selected");
     }
 
+    element.classList.add("selected");
 
-    /*
-     * CALCULATE PARLAY ODDS
-     */
-    function calculateParlayOdds() {
+    currentParlay[category] = {
+        selection: selection,
+        odds: odds
+    };
 
-        let totalMultiplier = 1;
-        let count = 0;
-
-        for (let key in currentParlay) {
-
-            let american = currentParlay[key].odds;
-
-            let decimal;
-
-            if (american > 0) {
-                decimal = (american / 100) + 1;
-            } else {
-                decimal = (100 / Math.abs(american)) + 1;
-            }
-
-            totalMultiplier *= decimal;
-            count++;
-        }
+    updateSlip();
+}
 
 
-        if (count === 0) {
+/* =========================
+   AMERICAN -> DECIMAL
+========================= */
 
-            return {
-                american: 0,
-                multiplier: 0
-            };
+function americanToDecimal(odds) {
 
-        }
+    if (odds > 0) {
+        return (odds / 100) + 1;
+    }
 
-
-        let finalAmerican;
-
-        if (totalMultiplier >= 2) {
-
-            finalAmerican =
-                Math.round(
-                    (totalMultiplier - 1) * 100
-                );
-
-        } else {
-
-            finalAmerican =
-                Math.round(
-                    -100 / (totalMultiplier - 1)
-                );
-
-        }
+    return (100 / Math.abs(odds)) + 1;
+}
 
 
-        if (finalAmerican > 0) {
-            finalAmerican = "+" + finalAmerican;
-        }
+/* =========================
+   PARLAY CALCULATION
+========================= */
 
+function calculateParlayOdds() {
 
+    let totalMultiplier = 1;
+    let count = 0;
+
+    for (let key in currentParlay) {
+
+        totalMultiplier *=
+            americanToDecimal(currentParlay[key].odds);
+
+        count++;
+    }
+
+    if (count === 0) {
         return {
-            american: finalAmerican,
-            multiplier: totalMultiplier
+            american: 0,
+            multiplier: 0
         };
     }
 
 
-    /*
-     * UPDATE THE BET SLIP
-     */
-    function updateSlip() {
+    let finalAmerican;
 
-        const activeBetsDiv =
-            document.getElementById('slip-active-bets');
+    if (totalMultiplier >= 2) {
 
-        let html = "";
-        let count = 0;
-
-
-        for (let key in currentParlay) {
-
-            const bet = currentParlay[key];
-
-            const oddsText =
-                bet.odds > 0
-                    ? "+" + bet.odds
-                    : bet.odds;
-
-
-            html += `
-                <div
-                    style="
-                        color:#fff;
-                        margin-bottom:4px;
-                        font-size:0.85rem;
-                    "
-                >
-                    <b>${key}:</b>
-                    ${bet.selection}
-                    (${oddsText})
-                </div>
-            `;
-
-            count++;
-        }
-
-
-        if (count > 0) {
-
-            activeBetsDiv.innerHTML = html;
-
-
-            const oddsObj =
-                calculateParlayOdds();
-
-
-            document
-                .getElementById('display-odds')
-                .innerText =
-                oddsObj.american;
-
-
-            const wager =
-                parseFloat(
-                    document.getElementById('wager').value
-                ) || 0;
-
-
-            const payout =
-                wager * oddsObj.multiplier;
-
-
-            document
-                .getElementById('display-payout')
-                .innerText =
-                payout.toFixed(2);
-
-        } else {
-
-            activeBetsDiv.innerHTML =
-                "No active lines selected. Tap choices above to craft a slip!";
-
-
-            document
-                .getElementById('display-odds')
-                .innerText = "-";
-
-
-            document
-                .getElementById('display-payout')
-                .innerText = "0.00";
-
-        }
-
-    }
-
-
-    /*
-     * COPY THE COMPLETE SLIP
-     */
-    function copySlip() {
-
-        const username =
-            document
-                .getElementById('username')
-                .value
-                .trim()
-            ||
-            "Anonymous Gambler";
-
-
-        /*
-         * Require at least one selection.
-         */
-        if (Object.keys(currentParlay).length === 0) {
-
-            alert(
-                "Pick at least one biomarker before copying your slip!"
+        finalAmerican =
+            Math.round(
+                (totalMultiplier - 1) * 100
             );
 
-            return;
-        }
+    } else {
 
+        finalAmerican =
+            Math.round(
+                -100 / (totalMultiplier - 1)
+            );
+    }
+
+
+    return {
+        american: finalAmerican,
+        multiplier: totalMultiplier
+    };
+}
+
+
+/* =========================
+   ODDS DISPLAY
+========================= */
+
+function formatOdds(odds) {
+
+    if (odds === 100) {
+        return "+100";
+    }
+
+    return odds > 0
+        ? "+" + odds
+        : String(odds);
+}
+
+
+function oddsColor(odds) {
+
+    if (odds > 0) {
+        return "#39d98a";
+    }
+
+    if (odds < 0) {
+        return "#ff4444";
+    }
+
+    return "#ffffff";
+}
+
+
+/* =========================
+   UPDATE BET SLIP
+========================= */
+
+function updateSlip() {
+
+    const activeBetsDiv =
+        document.getElementById("slip-active-bets");
+
+    let html = "";
+    let count = 0;
+
+
+    for (let key in currentParlay) {
+
+        const bet = currentParlay[key];
+
+        html += `
+            <div style="
+                color:#fff;
+                margin-bottom:5px;
+                font-size:.85rem;
+            ">
+                <b>${key}:</b>
+                ${bet.selection}
+
+                <span style="
+                    color:${oddsColor(bet.odds)};
+                    font-weight:bold;
+                ">
+                    (${formatOdds(bet.odds)})
+                </span>
+            </div>
+        `;
+
+        count++;
+    }
+
+
+    const oddsDisplay =
+        document.getElementById("display-odds");
+
+    const payoutDisplay =
+        document.getElementById("display-payout");
+
+
+    if (count > 0) {
+
+        activeBetsDiv.innerHTML = html;
 
         const oddsObj =
             calculateParlayOdds();
 
+        oddsDisplay.innerText =
+            formatOdds(oddsObj.american);
+
+        oddsDisplay.style.color =
+            oddsColor(oddsObj.american);
+
 
         const wager =
-            document
-                .getElementById('wager')
-                .value;
+            parseFloat(
+                document.getElementById("wager").value
+            ) || 0;
 
 
-        const payout =
-            document
-                .getElementById('display-payout')
-                .innerText;
+        payoutDisplay.innerText =
+            (wager * oddsObj.multiplier).toFixed(2);
+
+    } else {
+
+        activeBetsDiv.innerHTML =
+            "No active lines selected. Tap choices above to craft a slip!";
+
+        oddsDisplay.innerText = "-";
+        oddsDisplay.style.color = "#ffffff";
+
+        payoutDisplay.innerText = "0.00";
+    }
+}
 
 
-        /*
-         * Build list of selections.
-         */
-        let selections = "";
+/* =========================
+   COPY TO DISCORD
+========================= */
+
+function copySlip() {
+
+    if (Object.keys(currentParlay).length === 0) {
+
+        alert(
+            "Pick at least one biomarker before copying your slip!"
+        );
+
+        return;
+    }
 
 
-        for (let key in currentParlay) {
-
-            const bet =
-                currentParlay[key];
-
-
-            const oddsText =
-                bet.odds > 0
-                    ? "+" + bet.odds
-                    : bet.odds;
+    const username =
+        document
+            .getElementById("username")
+            .value
+            .trim()
+        ||
+        "Anonymous Gambler";
 
 
-            selections +=
-                `• ${key}: ${bet.selection} (${oddsText})\n`;
+    const wager =
+        document
+            .getElementById("wager")
+            .value;
 
-        }
+
+    const payout =
+        document
+            .getElementById("display-payout")
+            .innerText;
 
 
-        /*
-         * Final Discord-friendly message.
-         */
-        const slipText =
+    const oddsObj =
+        calculateParlayOdds();
+
+
+    let selections = "";
+
+
+    for (let key in currentParlay) {
+
+        const bet =
+            currentParlay[key];
+
+        selections +=
+            `• ${key}: ${bet.selection} (${formatOdds(bet.odds)})\n`;
+    }
+
+
+    const slipText =
 `🎰 LAB RESULTS PARLAY
 👤 ${username}
 
 ${selections}
 💰 Wager: ${wager} Fake Chips
-📈 Parlay Odds: ${oddsObj.american}
-🏆 Est. Payout: ${payout} Fake Chips`;
+📈 Parlay Odds: ${formatOdds(oddsObj.american)}
+🏆 Est. Payout: ${payout} Fake Chips
+
+⚠️ Fake sportsbook. Real bloodwork. Questionable financial judgment.`;
 
 
-        /*
-         * Modern clipboard API.
-         */
-        if (
-            navigator.clipboard &&
-            window.isSecureContext
-        ) {
+    if (
+        navigator.clipboard &&
+        window.isSecureContext
+    ) {
 
-            navigator.clipboard
-                .writeText(slipText)
-                .then(function () {
+        navigator.clipboard
+            .writeText(slipText)
+            .then(() => {
+                alert("Slip copied to clipboard!");
+            })
+            .catch(() => {
+                fallbackCopy(slipText);
+            });
 
-                    alert(
-                        "Slip copied to clipboard!"
-                    );
+    } else {
 
-                })
-                .catch(function () {
+        fallbackCopy(slipText);
+    }
+}
 
-                    fallbackCopy(slipText);
 
-                });
+/* =========================
+   COPY FALLBACK
+========================= */
 
-        } else {
+function fallbackCopy(text) {
 
-            fallbackCopy(slipText);
+    const textarea =
+        document.createElement("textarea");
 
-        }
+    textarea.value = text;
 
+    textarea.style.position = "fixed";
+    textarea.style.left = "-999999px";
+
+    document.body.appendChild(textarea);
+
+    textarea.focus();
+    textarea.select();
+
+
+    try {
+
+        document.execCommand("copy");
+
+        alert("Slip copied to clipboard!");
+
+    } catch (err) {
+
+        alert(
+            "Couldn't automatically copy the slip."
+        );
     }
 
 
-    /*
-     * FALLBACK COPY METHOD
-     *
-     * Useful when testing locally or when
-     * navigator.clipboard isn't available.
-     */
-    function fallbackCopy(text) {
-
-        const textarea =
-            document.createElement('textarea');
-
-
-        textarea.value = text;
-
-        textarea.style.position = 'fixed';
-        textarea.style.left = '-999999px';
-        textarea.style.top = '-999999px';
-
-
-        document.body.appendChild(textarea);
-
-        textarea.focus();
-        textarea.select();
-
-
-        try {
-
-            document.execCommand('copy');
-
-            alert(
-                "Slip copied to clipboard!"
-            );
-
-        } catch (err) {
-
-            alert(
-                "Couldn't automatically copy the slip. Please copy it manually."
-            );
-
-        }
-
-
-        document.body.removeChild(textarea);
-    }
+    document.body.removeChild(textarea);
+}
 
 </script>
 
