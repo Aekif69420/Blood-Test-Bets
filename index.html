@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Test Sportsbook</title>
+    <style>
+        body { background-color: #121214; color: #fff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .sportsbook { width: 100%; max-width: 500px; }
+        .header { background: linear-gradient(90deg, #1d8041, #121214); padding: 15px; border-radius: 8px 8px 0 0; font-weight: bold; font-size: 1.2rem; border-bottom: 2px solid #26a65b; }
+        .market-section { background-color: #1a1b1f; margin-bottom: 15px; border-radius: 8px; overflow: hidden; border: 1px solid #2a2c33; }
+        .market-title { background-color: #22242b; padding: 10px 15px; font-size: 0.9rem; font-weight: bold; color: #a1a7b5; text-transform: uppercase; letter-spacing: 1px; }
+        .prop-card { padding: 15px; border-bottom: 1px solid #2a2c33; }
+        .prop-card:last-child { border-bottom: none; }
+        .prop-name { font-weight: bold; margin-bottom: 10px; font-size: 1rem; }
+        .odds-row { display: flex; gap: 10px; }
+        .odds-button { flex: 1; background-color: #2a2c33; border: 1px solid #3a3f4d; color: #fff; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; transition: all 0.2s; }
+        .odds-button:hover { background-color: #343844; }
+        .odds-button.selected { background-color: #1d8041; border-color: #26a65b; }
+        .odds-val { color: #26a65b; }
+        .odds-button.selected .odds-val { color: #fff; }
+        .bet-slip { background-color: #1a1b1f; border-radius: 8px; border: 2px solid #26a65b; padding: 15px; margin-top: 20px; }
+        .slip-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #26a65b; border-bottom: 1px solid #2a2c33; padding-bottom: 5px; }
+        .slip-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.95rem; }
+        input[type="number"] { background-color: #2a2c33; border: 1px solid #3a3f4d; color: #fff; padding: 8px; border-radius: 4px; width: 80px; text-align: right; font-weight: bold; }
+        .payout-box { background-color: #22242b; padding: 12px; border-radius: 6px; margin-top: 15px; }
+        .discord-btn { width: 100%; background-color: #5865F2; color: white; border: none; padding: 12px; font-weight: bold; font-size: 1rem; border-radius: 6px; cursor: pointer; margin-top: 15px; transition: background 0.2s; }
+        .discord-btn:hover { background-color: #4752c4; }
+        .username-input { width: calc(100% - 20px); background-color: #2a2c33; border: 1px solid #3a3f4d; color: #fff; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+<div class="sportsbook">
+    <div class="header">🩸 LAB RESULTS SPORTSBOOK</div>
+    
+    <div style="padding: 15px 0;">
+        <input type="text" id="username" class="username-input" placeholder="Enter your Discord Username" oninput="updateSlip()">
+    </div>
+
+    <!-- CBC -->
+    <div class="market-section">
+        <div class="market-title">Complete Blood Count (CBC)</div>
+        <div class="prop-card">
+            <div class="prop-name">White Blood Cell (WBC) Count</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('WBC', 'Over 10.0', 150, this)">Over 10.0 <span class="odds-val">+150</span></button>
+                <button class="odds-button" onclick="selectProp('WBC', 'Under 10.0', -180, this)">Under 10.0 <span class="odds-val">-180</span></button>
+            </div>
+        </div>
+        <div class="prop-card">
+            <div class="prop-name">Platelet Count</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('Platelets', 'Over 150k', -250, this)">Over 150k <span class="odds-val">-250</span></button>
+                <button class="odds-button" onclick="selectProp('Platelets', 'Under 150k', 200, this)">Under 150k <span class="odds-val">+200</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CMP -->
+    <div class="market-section">
+        <div class="market-title">Comprehensive Metabolic Panel (CMP)</div>
+        <div class="prop-card">
+            <div class="prop-name">Fasting Glucose (Blood Sugar)</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('Glucose', 'Over 99', 110, this)">Over 99 <span class="odds-val">+110</span></button>
+                <button class="odds-button" onclick="selectProp('Glucose', 'Under 99', -130, this)">Under 99 <span class="odds-val">-130</span></button>
+            </div>
+        </div>
+        <div class="prop-card">
+            <div class="prop-name">Liver Enzymes (ALT/AST)</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('Liver', 'Perfect Normal', -300, this)">All Normal <span class="odds-val">-300</span></button>
+                <button class="odds-button" onclick="selectProp('Liver', 'Elevated', 220, this)">Elevated <span class="odds-val">+220</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEP C -->
+    <div class="market-section">
+        <div class="market-title">Hepatitis Viral Screen</div>
+        <div class="prop-card">
+            <div class="prop-name">Hepatitis C Antibody</div>
+            <div class="odds-row">
+                <button class="odds-button" onclick="selectProp('HepC', 'Negative', -5000, this)">Negative <span class="odds-val">-5000</span></button>
+                <button class="odds-button" onclick="selectProp('HepC', 'Positive', 3500, this)">Positive <span class="odds-val">+3500</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BET SLIP -->
+    <div class="bet-slip">
+        <div class="slip-title">YOUR BET SLIP</div>
+        <div id="slip-active-bets" style="color: #a1a7b5; font-size: 0.9rem; margin-bottom: 15px;">No active selections. Tap lines above!</div>
+        
+        <div class="slip-row">
+            <span>Risk Amount (Fake Tokens):</span>
+            <input type="number" id="wager" value="100" min="1" oninput="updateSlip()">
+        </div>
+
+        <div class="payout-box">
+            <div class="slip-row" style="margin-bottom: 5px;"><span>Total Odds:</span><span id="display-odds" style="font-weight:bold; color:#26a65b;">-</span></div>
+            <div class="slip-row" style="margin-bottom: 0; font-size: 1.1rem; font-weight: bold;"><span>Potential Payout:</span><span id="display-payout" style="color:#26a65b;">0.00</span></div>
+        </div>
+
+        <button class="discord-btn" onclick="copySlip()">📋 COPY FOR DISCORD</button>
+    </div>
+</div>
+
+<script>
+    let currentParlay = {};
+
+    function selectProp(category, selection, odds, element) {
+        const siblings = element.parentNode.children;
+        for (let sib of siblings) { sib.classList.remove('selected'); }
+        
+        element.classList.add('selected');
+        currentParlay[category] = { selection, odds };
+        updateSlip();
+    }
+
+    function calculateParlayOdds() {
+        let totalMultiplier = 1;
+        let count = 0;
+        for (let key in currentParlay) {
+            let american = currentParlay[key].odds;
+            let decimal = american > 0 ? (american / 100) + 1 : (100 / Math.abs(american)) + 1;
+            totalMultiplier *= decimal;
+            count++;
+        }
+        if (count === 0) return { american: 0, multiplier: 0 };
+        
+        let finalAmerican = totalMultiplier >= 2 ? Math.round((totalMultiplier - 1) * 100) : Math.round(-100 / (totalMultiplier - 1));
+        if (finalAmerican > 0) finalAmerican = "+" + finalAmerican;
+        return { american: finalAmerican, multiplier: totalMultiplier };
+    }
+
+    function updateSlip() {
+        const activeBetsDiv = document.getElementById('slip-active-bets');
+        let html = "";
+        let count = 0;
+        
+        for (let key in currentParlay) {
+            html += `<div style="color:#fff; margin-bottom:5px;"><b>${key}:</b> ${currentParlay[key].selection} (${currentParlay[key].odds > 0 ? '+' : ''}${currentParlay[key].odds})</div>`;
+            count++;
+        }
+        
+        if (count > 0) {
+            activeBetsDiv.innerHTML = html;
+            let oddsObj = calculateParlayOdds();
+            document.getElementById('display-odds').innerText = oddsObj.american;
+            let wager = parseFloat(document.getElementById('wager').value) || 0;
+            document.getElementById('display-payout').innerText = (wager * oddsObj.multiplier).toFixed(2);
+        } else {
+            activeBetsDiv.innerHTML = "No active selections. Tap lines above!";
+            document.getElementById('display-odds').innerText = "-";
+            document.getElementById('display-payout').innerText = "0.00";
+        }
+    }
+
+    function copySlip() {
+        const username = document.getElementById('username').value.trim() || "Anonymous Gambler";
+        let oddsObj = calculateParlayOdds();
+        let wager = document.getElementById('wager').value;
+        let payout = document.getElementById('display-payout').innerText;
+        
+        if (Object.keys(currentParlay).length === 0) {
+            alert("Please pick at least one test result before copying!");
+            return;
+        }
+
+        let txt = `🧾 **LAB RESULTS BET SLIP** 🧾\n👤 **Player:** ${username}\n\n`;
+        for (let key in currentParlay) {
+            txt += `🔹 **${key}:** ${currentParlay[key].selection}\n`;
+        }
+        txt += `\n💰 **Stake:** ${wager} Fake Tokens\n📈 **Total Odds:** ${oddsObj.american}\n🏆 **Potential Payout:** ${payout} Tokens`;
+
+        navigator.clipboard.writeText(txt).then(() => {
+            alert("Bet Slip copied to your clipboard! Now go paste it into Discord.");
+        });
+    }
+</script>
+</body>
