@@ -6,7 +6,7 @@
     <title>The Ultimate Lab Results Sportsbook</title>
     <style>
         body { background-color: #0c0d12; color: #fff; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .sportsbook { width: 100%; max-width: 600px; padding-bottom: 100px; }
+        .sportsbook { width: 100%; max-width: 600px; padding-bottom: 20px; }
         .header { background: linear-gradient(90deg, #b31010, #1e2029); padding: 20px; border-radius: 8px 8px 0 0; font-weight: bold; font-size: 1.4rem; border-bottom: 2px solid #ff3333; letter-spacing: 1px; }
         .market-section { background-color: #15171e; margin-top: 15px; margin-bottom: 15px; border-radius: 8px; overflow: hidden; border: 1px solid #232631; }
         .market-title { background-color: #1e212b; padding: 12px 15px; font-size: 0.95rem; font-weight: bold; color: #f0f4f8; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #2d3142; }
@@ -20,7 +20,7 @@
         .odds-button.selected { background-color: #b31010; border-color: #ff3333; }
         .odds-val { color: #ff4444; }
         .odds-button.selected .odds-val { color: #fff; }
-        .bet-slip { background-color: #15171e; border-radius: 8px; border: 2px solid #ff3333; padding: 15px; margin-top: 25px; position: sticky; bottom: 20px; box-shadow: 0px 10px 30px rgba(0,0,0,0.7); }
+        .bet-slip { background-color: #15171e; border-radius: 8px; border: 2px solid #ff3333; padding: 15px; margin-top: 25px; position: sticky; bottom: 20px; box-shadow: 0px 10px 30px rgba(0,0,0,0.8); z-index: 100; }
         .slip-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #ff3333; border-bottom: 1px solid #232631; padding-bottom: 5px; text-transform: uppercase; }
         .slip-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.95rem; }
         input[type="number"] { background-color: #212431; border: 1px solid #32374b; color: #fff; padding: 8px; border-radius: 4px; width: 80px; text-align: right; font-weight: bold; }
@@ -44,7 +44,7 @@
         <div class="market-title">Metabolic Health & Glycemic Control</div>
         <div class="prop-card">
             <div class="prop-name">Hemoglobin A1c (HbA1c)</div>
-            <div class="prop-desc">3-month structural blood sugar average. Normal is <5.7%.</div>
+            <div class="prop-desc">3-month structural blood sugar average. Normal is &lt;5.7%.</div>
             <div class="odds-row">
                 <button class="odds-button" onclick="selectProp('HbA1c', 'Over 5.6%', 140, this)">Over 5.6% <span class="odds-val">+140</span></button>
                 <button class="odds-button" onclick="selectProp('HbA1c', 'Under 5.6%', -175, this)">Under 5.6% <span class="odds-val">-175</span></button>
@@ -65,7 +65,7 @@
         <div class="market-title">Lipid Panel (Cardiovascular Fats)</div>
         <div class="prop-card">
             <div class="prop-name">LDL Cholesterol</div>
-            <div class="prop-desc">The "Bad" cholesterol. Optimal is <100 mg/dL.</div>
+            <div class="prop-desc">The "Bad" cholesterol. Optimal is &lt;100 mg/dL.</div>
             <div class="odds-row">
                 <button class="odds-button" onclick="selectProp('LDL', 'Over 100 mg/dL', -115, this)">Over 100 <span class="odds-val">-115</span></button>
                 <button class="odds-button" onclick="selectProp('LDL', 'Under 100 mg/dL', -115, this)">Under 100 <span class="odds-val">-115</span></button>
@@ -73,7 +73,7 @@
         </div>
         <div class="prop-card">
             <div class="prop-name">HDL Cholesterol</div>
-            <div class="prop-desc">The "Good" protective cholesterol. Normal is >40 mg/dL.</div>
+            <div class="prop-desc">The "Good" protective cholesterol. Normal is &gt;40 mg/dL.</div>
             <div class="odds-row">
                 <button class="odds-button" onclick="selectProp('HDL', 'Over 50 mg/dL', -130, this)">Over 50 <span class="odds-val">-130</span></button>
                 <button class="odds-button" onclick="selectProp('HDL', 'Under 50 mg/dL', 100, this)">Under 50 <span class="odds-val">+100</span></button>
@@ -81,7 +81,7 @@
         </div>
         <div class="prop-card">
             <div class="prop-name">Triglycerides</div>
-            <div class="prop-desc">Stored fat lipids in serum. Normal is <150 mg/dL.</div>
+            <div class="prop-desc">Stored fat lipids in serum. Normal is &lt;150 mg/dL.</div>
             <div class="odds-row">
                 <button class="odds-button" onclick="selectProp('Triglycerides', 'Over 150 mg/dL', 150, this)">Over 150 <span class="odds-val">+150</span></button>
                 <button class="odds-button" onclick="selectProp('Triglycerides', 'Under 150 mg/dL', -200, this)">Under 150 <span class="odds-val">-200</span></button>
@@ -137,3 +137,5 @@
     <!-- CMP RENAL PANEL -->
     <div class="market-section">
         <div class="market-title">CMP - Kidney Function & Electrolytes</div>
+        <div class="prop-card">
+            <div class="prop-name">Creatinine</div>
